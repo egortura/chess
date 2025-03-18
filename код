@@ -1,0 +1,107 @@
+import serial
+import time
+
+### Определяем переменные с текстами
+UID1 = "Текст для UID1"
+UID2 = "Текст для UID2"
+UID3 = "Текст для UID3"
+UID4 = "Текст для UID4"
+UID5 = "Текст для UID5"
+UID6 = "Текст для UID6"
+UID7 = "Текст для UID7"
+UID8 = "Текст для UID8"
+UID9 = "Текст для UID9"
+UID10 = "Текст для UID10"
+UID11 = "Текст для UID11"
+UID12 = "Текст для UID12"
+UID13 = "Текст для UID13"
+UID14 = "Текст для UID14"
+UID15 = "Текст для UID15"
+UID16 = "Текст для UID16"
+UID17 = "Текст для UID17"
+UID18 = "Текст для UID18"
+UID19 = "Текст для UID19"
+UID20 = "Текст для UID20"
+UID21 = "Текст для UID21"
+UID22 = "Текст для UID22"
+UID23 = "Текст для UID23"
+UID24 = "Текст для UID24"
+UID25 = "Текст для UID25"
+UID26 = "Текст для UID26"
+UID27 = "Текст для UID27"
+UID28 = "Текст для UID28"
+UID29 = "Текст для UID29"
+UID30 = "Текст для UID30"
+UID31 = "Текст для UID31"
+UID32 = "Текст для UID32"
+
+### Определяем списки
+whitepeshka = [UID1, UID2, UID3, UID4, UID5, UID6, UID7, UID8]
+whiteladya = [UID9, UID10]
+whiteloshad = [UID11, UID12]
+whiteslon = [UID13, UID14]
+whiteking = [UID15]
+whitequeen = [UID16]
+blackpeshka = [UID17, UID18, UID19, UID20, UID21, UID22, UID23, UID24]
+blackladya = [UID25, UID26]
+blackloshad = [UID27, UID28]
+blackslon = [UID29, UID30]
+blackking = [UID31]
+blackqueen = [UID32]
+
+### Создаем словарь для поиска
+text_to_list = {
+    UID1: "whitepeshka",
+    UID2: "whitepeshka",
+    UID3: "whitepeshka",
+    UID4: "whitepeshka",
+    UID5: "whitepeshka",
+    UID6: "whitepeshka",
+    UID7: "whitepeshka",
+    UID8: "whitepeshka",
+    UID9: "whiteladya",
+    UID10: "whiteladya",
+    UID11: "whiteloshad",
+    UID12: "whiteloshad",
+    UID13: "whiteslon",
+    UID14: "whiteslon",
+    UID15: "whiteking",
+    UID16: "whitequeen",
+    UID17: "blackpeshka",
+    UID18: "blackpeshka",
+    UID19: "blackpeshka",
+    UID20: "blackpeshka",
+    UID21: "blackpeshka",
+    UID22: "blackpeshka",
+    UID23: "blackpeshka",
+    UID24: "blackpeshka",
+    UID25: "blackladya",
+    UID26: "blackladya",
+    UID27: "blackloshad",
+    UID28: "blackloshad",
+    UID29: "blackslon",
+    UID30: "blackslon",
+    UID31: "blackking",
+    UID32: "blackqueen",
+}
+
+### Функция для поиска списка по тексту
+def find_list_by_text(text):
+    return text_to_list.get(text, "Не найдено")
+
+### Настройка последовательного порта
+ser = serial.Serial('COM3', 9600)  # Замените 'COM3' на ваш порт
+time.sleep(2)  # Даем время на инициализацию порта
+
+### Основной цикл программы
+while True:
+    # Читаем данные из последовательного порта
+    if ser.in_waiting > 0:
+        user_input = ser.readline().decode('utf-8').strip()
+        print(f"Получено от Arduino: {user_input}")
+        
+        # Поиск списка по UID
+        result = find_list_by_text(user_input)
+        print(f"Результат поиска: {result}")
+    else:
+        time.sleep(0.1)
